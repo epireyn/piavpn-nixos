@@ -69,7 +69,6 @@ in
         enable = true;
         unmanaged = [ "interface-name:wgpia*" ];
       };
-      nftables.enable = true;
     };
 
     users.groups = {

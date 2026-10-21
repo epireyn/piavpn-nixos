@@ -3,9 +3,9 @@
   lib,
   fetchurl,
   makeWrapper,
-  qt6,
+  kdePackages,
   autoPatchelfHook,
-  wrapQtAppsHook ? qt6.wrapQtAppsHook,
+  wrapQtAppsHook ? kdePackages.wrapQtAppsHook,
   libcap_ng,
   bash,
   libnl,
@@ -25,7 +25,6 @@
   openresolv,
   util-linux,
   coreutils,
-  xkeyboardconfig,
   ...
 }:
 stdenv.mkDerivation rec {
@@ -45,13 +44,13 @@ stdenv.mkDerivation rec {
   ];
 
   buildInputs = [
-    qt6.qtbase
-    qt6.qtwayland
-    qt6.qt3d
-    qt6.qtquicktimeline
-    qt6.qtvirtualkeyboard
-    qt6.qtlottie
-    qt6.qtscxml
+    kdePackages.qtbase
+    kdePackages.qtwayland
+    kdePackages.qt3d
+    kdePackages.qtquicktimeline
+    kdePackages.qtvirtualkeyboard
+    kdePackages.qtlottie
+    kdePackages.qtscxml
     libcap_ng
 
     bash
@@ -106,7 +105,10 @@ stdenv.mkDerivation rec {
     mkdir -p ${installOutDir}
     cp -a ./piafiles/* ${installOutDir}
 
-    for binary in pia-client pia-daemon pia-hnsd pia-openvpn pia-ss-local pia-support-tool pia-unbound pia-wireguard-go piactl support-tool-launcher; do
+    rm -r ${installOutDir}/plugins
+    rm ${installOutDir}/lib/lib*.so*
+
+    for binary in pia-client pia-daemon pia-hnsd pia-openvpn pia-ss-local pia-support-tool pia-unbound pia-amneziawg-go piactl support-tool-launcher; do
       makeWrapper ${installOutDir}/bin/$binary ${installOutDir}/bin/$binary-wrapped \
         --prefix PATH : "${
           lib.makeBinPath [
@@ -128,9 +130,7 @@ stdenv.mkDerivation rec {
             libnl.out
             libnsl.out
           ]
-        }" \
-      --set QT_QPA_PLATFORM xcb \
-      --set QT_XKB_CONFIG_ROOT "${xkeyboardconfig}/share/X11/xkb"
+        }"
     done
 
     mkdir -p $out/share/icons/hicolor/128x128/apps

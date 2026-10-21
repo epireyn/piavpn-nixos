@@ -5,7 +5,7 @@
       inherit (pkgs)
         stdenv
         lib
-        qt6
+        kdePackages
         makeWrapper
         xterm
         openssl
@@ -29,7 +29,5 @@
         util-linux
         coreutils
         ;
-      wrapQtAppsHook = pkgs.qt6.wrapQtAppsHook;
-      xkeyboardconfig = pkgs.xkeyboard-config;
     };
 }
