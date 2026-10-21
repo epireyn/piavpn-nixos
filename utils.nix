@@ -30,6 +30,6 @@
         coreutils
         ;
       wrapQtAppsHook = pkgs.qt6.wrapQtAppsHook;
-      xkeyboardconfig = pkgs.xorg.xkeyboardconfig;
+      xkeyboardconfig = pkgs.xkeyboard-config;
     };
 }
