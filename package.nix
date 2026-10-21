@@ -30,11 +30,11 @@
 }:
 stdenv.mkDerivation rec {
   pname = "piavpn";
-  version = "3.6.2-08398";
+  version = "3.8-08539";
 
   src = fetchurl {
     url = "https://installers.privateinternetaccess.com/download/pia-linux-${version}.run";
-    sha256 = "sha256-xRNyHkLnB6X+8DxEgKMB/VQlUco1e9UgUyOslCHfr/0=";
+    sha256 = "sha256-o88uK1DSlpO6WPCuIy5SxXhfAkSlbm7QBbaEsYdnOZ8=";
   };
 
   nativeBuildInputs = [
@@ -152,7 +152,7 @@ stdenv.mkDerivation rec {
     description = "Private Internet Access (PIA) VPN client";
     homepage = "https://www.privateinternetaccess.com/";
     license = lib.licenses.unfree;
-    maintainers = [ "Zonni" ];
+    maintainers = with lib.maintainers; [ epireyn ];
     platforms = [ "x86_64-linux" ];
   };
 }
