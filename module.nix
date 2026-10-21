@@ -44,22 +44,14 @@ in
         ExecStart = "/opt/piavpn/bin/pia-daemon-wrapped";
         Restart = "on-failure";
         User = "root";
-        Group = "root";
+        Group = pkg.groupName;
+        BindReadOnlyPaths = [ "${pkgs.bash}/bin/bash:/bin/bash"] ++ (map (x: "${pkg + pkg.piaOptDir}/${x}:${pkg.piaOptDir}/${x}") ["bin" "lib" "plugins" "qml" "share"]);
+        BindReadWritePaths = ["/etc/piavpn:${pkg.piaOptDir}/etc" "/var/lib/piavpn:${pkg.piaOptDir}/var"];
       };
     };
 
     systemd.tmpfiles.rules = [
-      "d ${pkg.piaOptDir} 0755 root root -"
-      "d ${pkg.piaOptDir}/etc 0755 root ${pkg.groupName} -"
-      "d ${pkg.piaOptDir}/etc/cgroup 0755 root ${pkg.groupName} -"
-      "d ${pkg.piaOptDir}/var 0755 root ${pkg.groupName} -"
-      "d ${pkg.piaOptDir}/var/crashes 0755 root ${pkg.groupName} -"
-      "L+ ${pkg.piaOptDir}/bin - - - - ${pkg + pkg.piaOptDir}/bin"
-      "L+ ${pkg.piaOptDir}/lib - - - - ${pkg + pkg.piaOptDir}/lib"
-      "L+ ${pkg.piaOptDir}/plugins - - - - ${pkg + pkg.piaOptDir}/plugins"
-      "L+ ${pkg.piaOptDir}/qml - - - - ${pkg + pkg.piaOptDir}/qml"
-      "L+ ${pkg.piaOptDir}/share - - - - ${pkg + pkg.piaOptDir}/share"
-      "L+ /bin/bash - - - - ${pkgs.bash}/bin/bash" # If you know how to solve it in a better way please contribute
+      "d /etc/piavpn 0755 root ${pkg.groupName} -"
     ];
 
     networking = {
