@@ -1,7 +1,7 @@
 {
   description = "Private Internet Access (PIA) VPN - Nix flake";
 
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
   outputs =
     { self, nixpkgs }:
