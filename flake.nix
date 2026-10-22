@@ -21,5 +21,6 @@
       };
 
       nixosModules.piavpn = import ./module.nix;
+      nixosModules.default = self.nixosModules.piavpn;
     };
 }
