@@ -131,7 +131,8 @@ stdenv.mkDerivation rec {
             libnl.out
             libnsl.out
           ]
-        }"
+        }" \
+       --set QT_PLUGIN_PATH "${qt6.qtbase}/lib/qt-6/plugins"
     done
 
     mkdir -p $out/share/icons/hicolor/128x128/apps
