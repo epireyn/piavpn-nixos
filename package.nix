@@ -3,9 +3,9 @@
   lib,
   fetchurl,
   makeWrapper,
-  kdePackages,
+  qt6,
   autoPatchelfHook,
-  wrapQtAppsHook ? kdePackages.wrapQtAppsHook,
+  wrapQtAppsHook ? qt6.wrapQtAppsHook,
   libcap_ng,
   bash,
   libnl,
@@ -44,13 +44,13 @@ stdenv.mkDerivation rec {
   ];
 
   buildInputs = [
-    kdePackages.qtbase
-    kdePackages.qtwayland
-    kdePackages.qt3d
-    kdePackages.qtquicktimeline
-    kdePackages.qtvirtualkeyboard
-    kdePackages.qtlottie
-    kdePackages.qtscxml
+    qt6.qtbase
+    qt6.qtwayland
+    qt6.qt3d
+    qt6.qtquicktimeline
+    qt6.qtvirtualkeyboard
+    qt6.qtlottie
+    qt6.qtscxml
     libcap_ng
 
     bash
@@ -106,6 +106,7 @@ stdenv.mkDerivation rec {
     cp -a ./piafiles/* ${installOutDir}
 
     rm -r ${installOutDir}/plugins
+    rm -r ${installOutDir}/qml
     rm ${installOutDir}/lib/lib*.so*
 
     for binary in pia-client pia-daemon pia-hnsd pia-openvpn pia-ss-local pia-support-tool pia-unbound pia-amneziawg-go piactl support-tool-launcher; do

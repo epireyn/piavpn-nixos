@@ -5,7 +5,7 @@
       inherit (pkgs)
         stdenv
         lib
-        kdePackages
+        qt6
         makeWrapper
         xterm
         openssl
