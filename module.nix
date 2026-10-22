@@ -43,10 +43,11 @@ in
         Type = "simple";
         ExecStart = "/opt/piavpn/bin/pia-daemon-wrapped";
         Restart = "on-failure";
+        StateDirectory = "piavpn";
         User = "root";
         Group = pkg.groupName;
         BindReadOnlyPaths = [ "${pkgs.bash}/bin/bash:/bin/bash"] ++ (map (x: "${pkg + pkg.piaOptDir}/${x}:${pkg.piaOptDir}/${x}") ["bin" "lib" "share"]);
-        BindPaths = ["/etc/piavpn:${pkg.piaOptDir}/etc" "/var/lib/piavpn:${pkg.piaOptDir}/var"];
+        BindPaths = [ "/etc/piavpn:${pkg.piaOptDir}/etc" ];
       };
     };
 
