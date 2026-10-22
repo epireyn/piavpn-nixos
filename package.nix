@@ -25,6 +25,7 @@
   openresolv,
   util-linux,
   coreutils,
+  openssl,
   ...
 }:
 stdenv.mkDerivation rec {
@@ -63,6 +64,8 @@ stdenv.mkDerivation rec {
     libatomic_ops
     xterm
     iproute2
+
+    openssl
   ];
 
   desktopItems = [
@@ -148,6 +151,11 @@ stdenv.mkDerivation rec {
     done
 
     runHook postInstall
+  '';
+
+  postFixup = ''
+    ln -sf ${openssl.out}/lib/libssl.so.3 ${installOutDir}/lib
+    ln -sf ${openssl.out}/lib/libcrypto.so.3 ${installOutDir}/lib
   '';
 
   meta = {
