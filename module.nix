@@ -45,7 +45,7 @@ in
         Restart = "on-failure";
         User = "root";
         Group = pkg.groupName;
-        BindReadOnlyPaths = [ "${pkgs.bash}/bin/bash:/bin/bash"] ++ (map (x: "${pkg + pkg.piaOptDir}/${x}:${pkg.piaOptDir}/${x}") ["bin" "lib" "plugins" "qml" "share"]);
+        BindReadOnlyPaths = [ "${pkgs.bash}/bin/bash:/bin/bash"] ++ (map (x: "${pkg + pkg.piaOptDir}/${x}:${pkg.piaOptDir}/${x}") ["bin" "lib" "share"]);
         BindReadWritePaths = ["/etc/piavpn:${pkg.piaOptDir}/etc" "/var/lib/piavpn:${pkg.piaOptDir}/var"];
       };
     };
